@@ -1,5 +1,5 @@
 apiVersion: argoproj.io/v1alpha1
-king: Application
+kind: Application
 metadata:
   name: knative-serving
   namespace: argocd
@@ -8,6 +8,6 @@ spec:
   source:
     repoURL: 'https://github.com/sprint-cloud/k8s-infra'
     path: knative-serving
-    targetRevisiom: HEAD
+    targetRevision: HEAD
   destination:
     server: 'https://kubernetes.default.svc'
