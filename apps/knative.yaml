@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: knative-operator
+  name: knative
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: 'https://github.com/sprint-cloud/k8s-infra'
-    path: knative-operator
+    path: knative
     targetRevision: HEAD
   destination:
     server: 'https://kubernetes.default.svc'
