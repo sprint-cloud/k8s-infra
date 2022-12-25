@@ -1,7 +1,8 @@
 apiVersion: tekton.dev/v1beta1
-kind: ClusterTask
+kind: Task
 metadata:
   name: git-clone
+  namespace: sprint-pipelines
   labels:
     app.kubernetes.io/version: "0.9"
   annotations:

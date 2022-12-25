@@ -2,7 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
   generateName: kaniko-build-
-  namespace: sprint-builds
+  namespace: sprint-pipelines
 spec:
   pipelineRef:
     name: kaniko-build
