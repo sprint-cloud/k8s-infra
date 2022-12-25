@@ -1,0 +1,16 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: private-repo-auth
+  namespace: private-repo
+spec:
+  encryptedData:
+    users: AgAe98+U6uPfi+MVfeu5tQtcq8frOI1zCHDM5Pk6znAwZRTM0ZI8jYQJE5QR2KL4X7lYULOz826/1n+PEPJwn0TU08NTz//rCp5PbuRDuaaQ6UgauwrHz0GZg+Rqd1yOkgzZpwZxaqpxnSwAVWewLmMHQSFShV5qYG4MQQLqBH9jPlU57qMlsGLAqln3byCbNFx/c5JMozvtHi1hvl8U7fGcVtwhm2XmKKnuiy+zJwWYSdECJEmmxsjy4EkEozSxd0e3eO53+8yE//vKxnw+cxMcbvGlbawRtfvn06MgTfw6DuVodHhL2z8JoOE1Dbi9VcQ9yfuVOOMcEW7i3B+U/yFoaOJGlGG8WrXvW7647M3We53PXayBGQN4jLO0vu0dtJSQZMV0fMWLLnZLSBVaSdX7YtIJJJ/5pU6A8J0xcCAa6X/E8UJ1EG88eQDvTOHk/g0iO0Dkl83o12cYyY1Pvh0jOLXTqFEw7ScHoEFHNRkWWeJKORW3oAnJXVEoie1ICTBsYEVAUTlaa5JVkrjSrXExn2o/11a5HFSLPvbls5BrHU94HEmTV55OTlQtKSV2gNjs2hhj6GOAQqKac5BygoJIZrH9zg0je36Tfm/4ZUntOJ43jS6l/YzneLnWrmp4bIA8SmHml75a8+qRMip5zJozxTOdStgcigRSzxG6IN+2lm+KIBtKnP11miU+rKyPt68JjZxSr0+9SvMNJawoubZd08w57D11RPMCqGUdnLnvYH6apZx2Li97BiqRBpqR+2mL+7Mrgl3YDXWUAF0KNsuUjIMhPFgf/Q==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: private-repo-auth
+      namespace: private-repo
+    type: Opaque
+

@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: private-repo
+  namespace: private-repo
+spec:
+  selector:
+    matchLabels:
+      app: private-repo
+  template:
+    metadata:
+      labels:
+        app: private-repo
+    spec:
+      containers:
+      - name: private-repo
+        image: registry:2
+        volumeMounts:
+          - name: config-volume
+            mountPath: /etc/docker/registry/config.yml
+            subPath: config.yml
+          - name: repo
+            mountPath: /var/lib/registry
+          - name: repo-auth
+            mountPath: /etc/docker/registry/htaccess
+            subPath: users
+            readOnly: true
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000
+      volumes:
+        - name: config-volume
+          configMap: 
+            name: private-repo-config
+        - name: repo
+          persistentVolumeClaim:
+            claimName: private-repo-images
+        - name: repo-auth
+          secret:
+            secretName: private-repo-auth
+            optional: false
