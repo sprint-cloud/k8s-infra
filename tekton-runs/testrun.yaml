@@ -1,11 +1,11 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  generateName: clone-build-push-run-
-  namespace: sprint-pipelines
+  generateName: kaniko-build-
+  namespace: sprint-builds
 spec:
   pipelineRef:
-    name: clone-build-push
+    name: kaniko-build
   podTemplate:
     securityContext:
       fsGroup: 65532

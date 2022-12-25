@@ -14,3 +14,6 @@ spec:
       jsonnet: {}
   destination:
     server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    automated:
+      prune: yes
