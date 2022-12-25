@@ -25,4 +25,4 @@ spec:
   - name: repo-url
     value: https://github.com/google/docsy-example.git
   - name: image-reference
-    value: berglucht/sprint-cloud:0.1
+    value: private-repo.private-repo.svc.cluster.local:5000/sprint-cloud:0.1
