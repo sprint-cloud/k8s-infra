@@ -9,5 +9,8 @@ spec:
     repoURL: 'https://github.com/sprint-cloud/k8s-infra'
     path: sprint-pipelines
     targetRevision: HEAD
+    directory:
+      recurse: yes
+      jsonnet: {}
   destination:
     server: 'https://kubernetes.default.svc'

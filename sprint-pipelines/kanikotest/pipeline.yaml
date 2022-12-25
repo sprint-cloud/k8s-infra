@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: clone-build-push
+  name: kaniko-build
   namespace: sprint-pipelines
 spec:
   description: | 
