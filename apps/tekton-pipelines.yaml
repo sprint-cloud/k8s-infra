@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tekton
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/sprint-cloud/k8s-infra'
+    path: tekton-pipelines
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
