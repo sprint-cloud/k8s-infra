@@ -1,0 +1,67 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    namespace: traefik
+    name: in-cluster
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+
+
+  source:
+    repoURL: 'https://traefik.github.io/charts'
+    targetRevision: 20.8.0
+    chart: traefik
+    helm:
+      values: |
+        globalArguments:
+          - "--global.sendanonymoususage=false"
+          - "--global.checknewversion=false"
+
+        additionalArguments:
+          - "--serversTransport.insecureSkipVerify=true"
+          - "--log.level=INFO"
+          
+        deployment:
+          enabled: true
+          replicas: 3
+          annotations: {}
+          podAnnotations: {}
+          additionalArguments: []
+          initContainers: []
+          
+        ports:
+          web:
+            redirectTo: websecure
+          websecure:
+            tls:
+              enabled: true
+
+        ingressRoute:
+          dashboard:
+            enabled: false
+          
+        providers:
+          kubernetesCRD:
+            enabled: true
+            ingressClass: traefik-external
+          kubernetesIngress:
+            enabled: true
+            publishedService:
+              enabled: false
+
+        rbac:
+          enabled: true
+
+        service:
+          enabled: true
+          type: LoadBalancer
+          annotations: {}
+          labels: {}
+          LoadBalancerSourceRanges: []
+          externalIPs: []
