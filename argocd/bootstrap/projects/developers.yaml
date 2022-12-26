@@ -9,3 +9,5 @@ spec:
   description: Knative apps created by Sprint developers
   sourceRepos:
     - '*'
+  destinations:
+    - server: https://kubernetes.default.svc

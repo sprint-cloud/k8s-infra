@@ -9,3 +9,6 @@ spec:
   description: Base infrastructure for Sprint-Cloud
   sourceRepos:
     - '*'
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: '*'
