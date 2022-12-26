@@ -1,0 +1,11 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: infrastructure
+  namespace: argocd
+  finalizers:
+    - resource-finalizer.argocd.argoproj.io
+spec:
+  description: Base infrastructure for Sprint-Cloud
+  sourceRepos:
+    - '*'

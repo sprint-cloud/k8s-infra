@@ -1,13 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sealed-secrets
+  name: bootstrap-cluster
   namespace: argocd
+  finalizers:
+    - resource-finalizer.argocd.argoproj.io
 spec:
-  project: infrastructure
+  project: default
   source:
     repoURL: 'https://github.com/sprint-cloud/k8s-infra'
-    path: sealed-secrets
+    path: apps
     targetRevision: HEAD
   destination:
     server: 'https://kubernetes.default.svc'
