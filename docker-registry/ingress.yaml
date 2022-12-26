@@ -1,0 +1,32 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: docker-registry
+  namespace: private-repo
+  annotations:
+    kubernetes.io/ingress.class: traefik-external
+spec:
+    entryPoints:
+      - websecure
+    routes: 
+      - match: Host(`repo.infra.sprint.luchtenberg.eu`)
+        kind: Rule
+        services:
+          - name: private-repo
+            port: 5000
+    tls:
+      secretName: traefik-svc-local-luchtenberg-eu-production-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: repo-infra-sprint-luchtenberg-eu
+  namespace: private-repo
+spec:
+  secretName: repo-infra-sprint-luchtenberg-eu-tls
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "repo.infra.sprint.luchtenberg.eu"
+  dnsNames:
+    - "repo.infra.sprint.luchtenberg.eu"
