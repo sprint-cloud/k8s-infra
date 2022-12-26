@@ -4,7 +4,7 @@ metadata:
   name: sprint-pipelines
   namespace: argocd
 spec:
-  project: infrastructure
+  project: default
   source:
     repoURL: 'https://github.com/sprint-cloud/k8s-infra'
     path: sprint-pipelines
