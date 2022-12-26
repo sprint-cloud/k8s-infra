@@ -15,7 +15,7 @@ spec:
           - name: private-repo
             port: 5000
     tls:
-      secretName: traefik-svc-local-luchtenberg-eu-production-tls
+      secretName: repo-infra-sprint-luchtenberg-eu-tls
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
