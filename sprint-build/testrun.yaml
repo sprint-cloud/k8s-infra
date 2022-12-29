@@ -1,0 +1,29 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: sprint-build-
+  namespace: sprint-build
+spec:
+  pipelineRef:
+    name: kaniko-build
+  podTemplate:
+    securityContext:
+      fsGroup: 65532
+  workspaces:
+  - name: shared-data
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+  - name: docker-credentials
+    secret:
+      secretName: docker-credentials
+  params:
+  - name: repo-url
+    value: https://github.com/Klapkop/docsy-example.git
+  - name: image-reference
+    value: repo.infra.sprint.luchtenberg.eu/docsy-example:latest
+    

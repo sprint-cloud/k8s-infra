@@ -1,0 +1,72 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: sprint-build-triggertemplate
+  namespace: sprint-build
+spec:
+  params:
+    - name: repo-revision
+      description: The git revision
+      default: master
+    - name: repo-url
+      description: The git repository url
+    - name: image-reference
+      description: Target image registry
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: sprint-build-
+        namespace: sprint-build
+      spec:
+        pipelineRef:
+          name: sprint-build-pipeline
+        podTemplate:
+          securityContext:
+            fsGroup: 65532
+        workspaces:
+        - name: shared-data
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+              - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 1Gi
+        - name: docker-credentials
+          secret:
+            secretName: docker-credentials
+        params:
+        - name: repo-url
+          value: $(tt.params.repo-url)
+        - name: repo-revision
+          value: $(tt.params.repo-revision)
+        - name: image-reference
+          value: $(tt.params.image-reference)
+---
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerBinding
+metadata:
+  name: sprint-build-pipelinebinding
+  namespace: sprint-build
+spec:
+  params:
+    - name: repo-revision
+      value: $(body.head_commit.id)
+    - name: repo-url
+      value: "https://github.com/$(body.repository.full_name)"
+    - name: image-reference
+      value: "repo.infra.sprint.luchtenberg.eu/sprint-build/$(body.repository.name):latest"
+---
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: sprint-build-listener
+  namespace: sprint-build
+spec:
+  serviceAccountName: tekton-triggers-example-sa
+  triggers:
+    - bindings:
+      - ref: sprint-build-pipelinebinding
+      template:
+        ref: sprint-build-triggertemplate
