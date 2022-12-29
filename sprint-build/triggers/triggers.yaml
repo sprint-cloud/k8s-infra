@@ -70,3 +70,13 @@ spec:
       - ref: sprint-build-pipelinebinding
       template:
         ref: sprint-build-triggertemplate
+      interceptors:
+        - ref:
+            name: "github"
+            kind: ClusterInterceptor
+            apiVersion: triggers.tekton.dev
+          params:
+            - name: "secretRef"
+              value:
+                secretName: github-webhook-secret
+                secretKey: secretToken
