@@ -1,0 +1,32 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: argo-workflows
+  namespace: argo
+  annotations:
+    kubernetes.io/ingress.class: traefik-external
+spec:
+    entryPoints:
+      - websecure
+    routes: 
+      - match: Host(`argo.infra.sprint.luchtenberg.eu`)
+        kind: Rule
+        services:
+          - name: argo-server
+            port: 2746
+    tls:
+      secretName: argo-infra-sprint-luchtenberg-eu-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: argo-infra-sprint-luchtenberg-eu
+  namespace: argo
+spec:
+  secretName: argo-infra-sprint-luchtenberg-eu-tls
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "argo.infra.sprint.luchtenberg.eu"
+  dnsNames:
+    - "argo.infra.sprint.luchtenberg.eu"
