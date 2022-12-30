@@ -1,0 +1,35 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard
+  namespace: traefik
+  annotations:
+    kubernetes.io/ingress.class: traefik-external
+spec:
+    entryPoints:
+      - websecure
+    routes: 
+      - match: Host(`traefik.infra.sprint.luchtenberg.eu`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
+        kind: Rule
+        middlewares:
+          - name: traefik-dashboard-basicauth
+            namespace: traefik
+        services:
+          - name: api@internal
+            kind: TraefikService
+    tls:
+      secretName: traefik-infra-sprint-luchtenberg-eu-production-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: traefik-infra-local-luchtenberg-eu
+  namespace: traefik
+spec:
+  secretName: traefik-infra-sprint-luchtenberg-eu-production-tls
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "traefik.infra.sprint.luchtenberg.eu"
+  dnsNames:
+    - "traefik.infra.sprint.luchtenberg.eu"
