@@ -5,7 +5,6 @@ metadata:
   namespace: argo
   annotations:
     kubernetes.io/ingress.class: traefik-external
-    ingress.kubernetes.io/protocol: https
 spec:
     entryPoints:
       - websecure
@@ -13,8 +12,10 @@ spec:
       - match: Host(`argo.infra.sprint.luchtenberg.eu`)
         kind: Rule
         services:
-          - name: argo-server
+          - kind: Service
+            name: argo-server
             port: 2746
+            scheme: https
     tls:
       secretName: argo-infra-sprint-luchtenberg-eu-tls
 ---
