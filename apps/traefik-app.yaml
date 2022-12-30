@@ -41,6 +41,11 @@ spec:
           websecure:
             tls:
               enabled: true
+          ssh:
+            port: 2222
+            exposedPort: 22
+            expose: true
+            protocol: TCP
 
         ingressRoute:
           dashboard:
