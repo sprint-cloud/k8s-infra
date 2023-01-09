@@ -16,5 +16,7 @@ data:
       kinds:
       - "PipelineRun"
       - "TaskRun"
+      - "MutatingWebhookConfiguration"
+      - "ValidatingWebhookConfiguration"
       clusters:
       - "*"
