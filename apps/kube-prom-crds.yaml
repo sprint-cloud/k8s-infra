@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus-crds
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/prometheus-community/helm-charts.git
+    targetRevision: "kube-prometheus-stack-43.2.1"
+    path: charts/kube-prometheus-stack/crds
+    directory:
+      recurse: true
+  destination:
+    name: in-cluster
+    namespace: monitoring
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - Replace=true
