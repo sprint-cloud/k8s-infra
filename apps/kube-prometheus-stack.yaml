@@ -10,8 +10,7 @@ spec:
     targetRevision: "43.2.1"
     chart: kube-prometheus-stack
     helm:
-      values: |
-        skipCrds: true
+     skipCrds: true
   destination:
     name: in-cluster
     namespace: monitoring
