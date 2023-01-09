@@ -12,6 +12,10 @@ spec:
   destination:
     name: in-cluster
     namespace: longhorn-system
+  helm:
+    values:
+      persistence:
+        defaultclass: true
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
