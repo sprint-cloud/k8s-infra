@@ -4,7 +4,7 @@ metadata:
   name: kube-prometheus-stack
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
   source:
@@ -12,6 +12,7 @@ spec:
     targetRevision: "44.2.0"
     chart: kube-prometheus-stack
     helm:
+      skipCrds: true
       values: |
         alertmanager:
           enabled: true
