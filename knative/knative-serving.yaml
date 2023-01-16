@@ -15,5 +15,9 @@ spec:
   config:
     network:
       ingress-class: "kourier.ingress.networking.knative.dev"
+      auto-tls: disabled
+      default-external-scheme: "https"
+      http-protocol: Redirected
+      
     domain:
       "apps.sprint.luchtenberg.eu": ""

@@ -1,0 +1,32 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: sprint-production
+  namespace: knative-serving
+  annotations:
+    kubernetes.io/ingress.class: traefik-external
+spec:
+    entryPoints:
+      - websecure
+    routes: 
+      - match: HostRegexp(`{subdomain:(.*)}.production.apps.sprint.luchtenberg.eu`)
+        kind: Rule
+        services:
+          - name: kourier-internal
+            port: 80
+    tls:
+      secretName: prod-apps-sprint-luchtenberg-eu-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: production-apps-sprint-luchtenberg-eu
+  namespace: knative-serving
+spec:
+  secretName: prod-apps-sprint-luchtenberg-eu-tls
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  commonName: "*.production.apps.sprint.luchtenberg.eu"
+  dnsNames:
+    - "*.production.apps.sprint.luchtenberg.eu"
