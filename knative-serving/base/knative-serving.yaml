@@ -10,6 +10,13 @@ spec:
   config:
     network:
       ingress-class: "kourier.ingress.networking.knative.dev"
-      auto-tls: disabled      
-    domain:
-      "apps.sprint.luchtenberg.eu": ""
+      auto-tls: Enabled
+      http-protocol: Redirected  
+    certmanager:   
+      namespace-wildcard-cert-selector: 
+        matchExpression:
+          - key: networking.knative.dev/enableWildcardCert
+            operator: In
+            values: ['true']
+
+

@@ -3,4 +3,4 @@ kind: Kustomization
 bases:
   - ../../base
 patchesStrategicMerge:
-  - domain.yaml
+  - knative-serving.yaml
