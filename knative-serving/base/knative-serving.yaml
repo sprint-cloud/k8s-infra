@@ -13,7 +13,7 @@ spec:
       auto-tls: Enabled
       http-protocol: Redirected  
     certmanager:   
-      namespace-wildcard-cert-selector: 
+      namespace-wildcard-cert-selector: | 
         matchExpression:
           - key: networking.knative.dev/enableWildcardCert
             operator: In
