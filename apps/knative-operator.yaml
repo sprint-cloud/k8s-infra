@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/sprint-cloud/k8s-infra'
-    path: knative-operator
+    path: knative-operator/base
     targetRevision: HEAD
   destination:
     server: 'https://kubernetes.default.svc'
