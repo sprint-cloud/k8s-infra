@@ -7,7 +7,3 @@ spec:
   config:
     domain:
       "apps.sprint.luchtenberg.eu": ""
-    certmanager:
-      issuerRef: |
-          kind: ClusterIssuer
-          name: letsencrypt-staging
