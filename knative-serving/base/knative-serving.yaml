@@ -12,12 +12,7 @@ spec:
       ingress-class: "kourier.ingress.networking.knative.dev"
       auto-tls: Enabled
       http-protocol: Redirected
-      namespace-wildcard-cert-selector: |
-        matchExpression:
-        - key: networking.knative.dev/enableWildcardCert
-          operator: In
-          values: ["true"]
-
+      namespace-wildcard-cert-selector: '{"matchExpressions": [{"key":"networking.knative.dev/enableWildcardCert","operator": "In", "values":["true"]}]}'
 
 
 
