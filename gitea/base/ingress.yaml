@@ -10,12 +10,12 @@ spec:
   - websecure
   routes:
   - kind: Rule
-    match: Host(`code.sprint.luchtenberg.eu`)
+    match: Host(`code.example.com`)
     services:
     - name: gitea-http
       port: 3000
   tls:
-    secretName: code-sprint-luchtenberg-eu-production-tls
+    secretName: gitea-tls
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRouteTCP
@@ -32,17 +32,3 @@ spec:
     services:
     - name: gitea-ssh
       port: 22
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: code-sprint-luchtenberg-eu
-  namespace: gitea
-spec:
-  secretName: code-sprint-luchtenberg-eu-production-tls
-  issuerRef:
-    name: letsencrypt-production
-    kind: ClusterIssuer
-  commonName: "code.sprint.luchtenberg.eu"
-  dnsNames:
-    - "code.sprint.luchtenberg.eu"

@@ -1,0 +1,11 @@
+resources:
+  - ingress.yaml
+  - certificate.yaml
+
+# helmChartInflationGenerator:
+# - chartName: gitea
+#   chartRepoUrl: https://dl.gitea.io/charts/
+#   chartversion: 
+#   releaseName: gitea
+#   releaseNamespace: gitea
+#   values: values.yaml
