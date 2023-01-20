@@ -4,13 +4,13 @@ bases:
 resources:
   - gitea-admin-secret-sealed.yaml
 
-helmChartInflationGenerator:
-- chartName: gitea
-  chartRepoUrl: https://dl.gitea.io/charts/
-  chartversion: 
+helmCharts:
+- name: gitea
+  repo: https://dl.gitea.io/charts/
+  version: 7.0.1
   releaseName: gitea
-  releaseNamespace: gitea
-  values: values.yaml
+  namespace: gitea
+  valuesFile: values.yaml
 
 patches:
   - patch: |

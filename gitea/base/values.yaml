@@ -63,7 +63,7 @@ containerSecurityContext: {}
 #   runAsNonRoot: true
 #   runAsUser: 1000
 
-## @deprecated The securityContext variable has been split two:
+## @depracated The securityContext variable has been split two:
 ## - containerSecurityContext
 ## - podSecurityContext.
 ## @param securityContext Run init and Gitea containers as a specific securityContext
@@ -228,7 +228,7 @@ extraContainerVolumeMounts: []
 ## @param extraInitVolumeMounts Mounts that are only mapped into the init-containers. Can be used for additional preconfiguration.
 extraInitVolumeMounts: []
 
-## @deprecated The extraVolumeMounts variable has been split two:
+## @depracated The extraVolumeMounts variable has been split two:
 ## - extraContainerVolumeMounts
 ## - extraInitVolumeMounts
 ## As an example, can be used to mount a client cert when connecting to an external Postgres server.
@@ -273,11 +273,8 @@ gitea:
   ## @param gitea.admin.password Password for the Gitea admin user
   ## @param gitea.admin.email Email for the Gitea admin user
   admin:
-    #existingSecret: gitea-admin-secret
-    existingSecret:
-    username: gitea_admin
-    password: r8sA8CPHD9!bt6d
-    email: "gitea@local.domain"
+    existingSecret: gitea-admin-secret
+
 
   ## @param gitea.metrics.enabled Enable Gitea metrics
   ## @param gitea.metrics.serviceMonitor.enabled Enable Gitea metrics service monitor
@@ -320,12 +317,16 @@ gitea:
     #   customEmailUrl:
 
   ## @param gitea.config  Configuration for the Gitea server,ref: [config-cheat-sheet](https://docs.gitea.io/en-us/config-cheat-sheet/)
-  config: {}
-  #  APP_NAME: "Gitea: Git with a cup of tea"
-  #  RUN_MODE: dev
-  #
-  #  server:
-  #    SSH_PORT: 22
+  config: 
+    APP_NAME: "SPRINT: Cloud ontwikkel omgeving."
+    RUN_MODE: dev
+    server:
+      SSH_PORT: 22
+      DOMAIN: gitea.example.com
+      ROOT_URL: https://gitea.example.com
+    service:
+      DISABLE_REGISTRATION: "true"
+
   #
   #  security:
   #    PASSWORD_COMPLEXITY: spec
@@ -338,8 +339,8 @@ gitea:
   #       name: gitea-app-ini-plaintext
 
   ## @param gitea.additionalConfigFromEnvs Additional configuration sources from environment variables
-  additionalConfigFromEnvs: []
-
+  additionalConfigFromEnvs: [] 
+  
   ## @param gitea.podAnnotations Annotations for the Gitea pod
   podAnnotations: {}
 
@@ -354,14 +355,14 @@ gitea:
   ## @param gitea.livenessProbe.failureThreshold Failure threshold for liveness probe
   # Modify the liveness probe for your needs or completely disable it by commenting out.
   livenessProbe:
-    enabled: true
-    tcpSocket:
-      port: http
-    initialDelaySeconds: 200
-    timeoutSeconds: 1
-    periodSeconds: 10
-    successThreshold: 1
-    failureThreshold: 10
+     enabled: true
+     tcpSocket:
+       port: http
+     initialDelaySeconds: 200
+     timeoutSeconds: 1
+     periodSeconds: 10
+     successThreshold: 1
+     failureThreshold: 10
 
   ## @section ReadinessProbe
   #
@@ -426,7 +427,7 @@ postgresql:
     postgresql:
       postgresqlDatabase: gitea
       postgresqlUsername: gitea
-      postgresqlPassword: gitea
+      postgresqlPassword: rivohdieReish8ciiVie
       servicePort: 5432
   persistence:
     size: 10Gi
