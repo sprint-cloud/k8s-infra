@@ -3,14 +3,7 @@ bases:
 
 resources:
   - gitea-admin-secret-sealed.yaml
-
-helmCharts:
-- name: gitea
-  repo: https://dl.gitea.io/charts/
-  version: 7.0.1
-  releaseName: gitea
-  namespace: gitea
-  valuesFile: values.yaml
+  - inline-config-sealed.yaml
 
 patches:
   - patch: |

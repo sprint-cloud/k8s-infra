@@ -5,28 +5,12 @@ kind: ServiceAccount
 automountServiceAccountToken: true
 metadata:
   name: gitea-memcached
-  namespace: default
+  namespace: gitea
   labels:
     app.kubernetes.io/name: memcached
     helm.sh/chart: memcached-5.9.0
     app.kubernetes.io/instance: gitea
     app.kubernetes.io/managed-by: Helm
----
-# Source: gitea/charts/postgresql/templates/secrets.yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: gitea-postgresql
-  labels:
-    app.kubernetes.io/name: postgresql
-    helm.sh/chart: postgresql-10.3.17
-    app.kubernetes.io/instance: gitea
-    app.kubernetes.io/managed-by: Helm
-  namespace: default
-type: Opaque
-data:
-  postgresql-postgres-password: "OVQ5WUpPM2Qwaw=="
-  postgresql-password: "cml2b2hkaWVSZWlzaDhjaWlWaWU="
 ---
 # Source: gitea/templates/gitea/config.yaml
 apiVersion: v1
@@ -49,24 +33,24 @@ stringData:
   cache: |-
     ADAPTER=memcache
     ENABLED=true
-    HOST=gitea-memcached.default.svc.cluster.local:11211
+    HOST=gitea-memcached.gitea.svc.cluster.local:11211
   database: |-
     DB_TYPE=postgres
-    HOST=gitea-postgresql.default.svc.cluster.local:5432
-    NAME=gitea
-    PASSWD=rivohdieReish8ciiVie
-    USER=gitea
+    HOST=db-host
+    NAME=app
+    PASSWD=database-password
+    USER=app
   metrics: ENABLED=false
   repository: ROOT=/data/git/gitea-repositories
   security: INSTALL_LOCK=true
   server: |-
     APP_DATA_PATH=/data
-    DOMAIN=gitea.example.com
+    DOMAIN=code.example.com
     ENABLE_PPROF=false
     HTTP_PORT=3000
     PROTOCOL=http
-    ROOT_URL=https://gitea.example.com
-    SSH_DOMAIN=gitea.example.com
+    ROOT_URL=https://code.example.com
+    SSH_DOMAIN=code.example.com
     SSH_LISTEN_PORT=22
     SSH_PORT=22
   service: DISABLE_REGISTRATION=true
@@ -326,7 +310,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: gitea-memcached
-  namespace: default
+  namespace: gitea
   labels:
     app.kubernetes.io/name: memcached
     helm.sh/chart: memcached-5.9.0
@@ -343,60 +327,6 @@ spec:
   selector:
     app.kubernetes.io/name: memcached
     app.kubernetes.io/instance: gitea
----
-# Source: gitea/charts/postgresql/templates/svc-headless.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: gitea-postgresql-headless
-  labels:
-    app.kubernetes.io/name: postgresql
-    helm.sh/chart: postgresql-10.3.17
-    app.kubernetes.io/instance: gitea
-    app.kubernetes.io/managed-by: Helm
-    # Use this annotation in addition to the actual publishNotReadyAddresses
-    # field below because the annotation will stop being respected soon but the
-    # field is broken in some versions of Kubernetes:
-    # https://github.com/kubernetes/kubernetes/issues/58662
-    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
-  namespace: default
-spec:
-  type: ClusterIP
-  clusterIP: None
-  # We want all pods in the StatefulSet to have their addresses published for
-  # the sake of the other Postgresql pods even before they're ready, since they
-  # have to be able to talk to each other in order to become ready.
-  publishNotReadyAddresses: true
-  ports:
-    - name: tcp-postgresql
-      port: 5432
-      targetPort: tcp-postgresql
-  selector:
-    app.kubernetes.io/name: postgresql
-    app.kubernetes.io/instance: gitea
----
-# Source: gitea/charts/postgresql/templates/svc.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: gitea-postgresql
-  labels:
-    app.kubernetes.io/name: postgresql
-    helm.sh/chart: postgresql-10.3.17
-    app.kubernetes.io/instance: gitea
-    app.kubernetes.io/managed-by: Helm
-  annotations:
-  namespace: default
-spec:
-  type: ClusterIP
-  ports:
-    - name: tcp-postgresql
-      port: 5432
-      targetPort: tcp-postgresql
-  selector:
-    app.kubernetes.io/name: postgresql
-    app.kubernetes.io/instance: gitea
-    role: primary
 ---
 # Source: gitea/templates/gitea/http-svc.yaml
 apiVersion: v1
@@ -456,7 +386,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gitea-memcached
-  namespace: default
+  namespace: gitea
   labels:
     app.kubernetes.io/name: memcached
     helm.sh/chart: memcached-5.9.0
@@ -488,7 +418,7 @@ spec:
                     app.kubernetes.io/name: memcached
                     app.kubernetes.io/instance: gitea
                 namespaces:
-                  - "default"
+                  - "gitea"
                 topologyKey: kubernetes.io/hostname
               weight: 1
         nodeAffinity:
@@ -535,157 +465,6 @@ spec:
         - name: tmp
           emptyDir: {}
 ---
-# Source: gitea/charts/postgresql/templates/statefulset.yaml
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: gitea-postgresql
-  labels:
-    app.kubernetes.io/name: postgresql
-    helm.sh/chart: postgresql-10.3.17
-    app.kubernetes.io/instance: gitea
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/component: primary
-  annotations:
-  namespace: default
-spec:
-  serviceName: gitea-postgresql-headless
-  replicas: 1
-  updateStrategy:
-    type: RollingUpdate
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: postgresql
-      app.kubernetes.io/instance: gitea
-      role: primary
-  template:
-    metadata:
-      name: gitea-postgresql
-      labels:
-        app.kubernetes.io/name: postgresql
-        helm.sh/chart: postgresql-10.3.17
-        app.kubernetes.io/instance: gitea
-        app.kubernetes.io/managed-by: Helm
-        role: primary
-        app.kubernetes.io/component: primary
-    spec:      
-      affinity:
-        podAffinity:
-          
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    app.kubernetes.io/name: postgresql
-                    app.kubernetes.io/instance: gitea
-                    app.kubernetes.io/component: primary
-                namespaces:
-                  - "default"
-                topologyKey: kubernetes.io/hostname
-              weight: 1
-        nodeAffinity:
-          
-      securityContext:
-        fsGroup: 1001
-      containers:
-        - name: gitea-postgresql
-          image: docker.io/bitnami/postgresql:11.11.0-debian-10-r62
-          imagePullPolicy: "IfNotPresent"
-          resources:
-            requests:
-              cpu: 250m
-              memory: 256Mi
-          securityContext:
-            runAsUser: 1001
-          env:
-            - name: BITNAMI_DEBUG
-              value: "false"
-            - name: POSTGRESQL_PORT_NUMBER
-              value: "5432"
-            - name: POSTGRESQL_VOLUME_DIR
-              value: "/bitnami/postgresql"
-            - name: PGDATA
-              value: "/bitnami/postgresql/data"
-            - name: POSTGRES_POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: gitea-postgresql
-                  key: postgresql-postgres-password
-            - name: POSTGRES_USER
-              value: "gitea"
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: gitea-postgresql
-                  key: postgresql-password
-            - name: POSTGRES_DB
-              value: "gitea"
-            - name: POSTGRESQL_ENABLE_LDAP
-              value: "no"
-            - name: POSTGRESQL_ENABLE_TLS
-              value: "no"
-            - name: POSTGRESQL_LOG_HOSTNAME
-              value: "false"
-            - name: POSTGRESQL_LOG_CONNECTIONS
-              value: "false"
-            - name: POSTGRESQL_LOG_DISCONNECTIONS
-              value: "false"
-            - name: POSTGRESQL_PGAUDIT_LOG_CATALOG
-              value: "off"
-            - name: POSTGRESQL_CLIENT_MIN_MESSAGES
-              value: "error"
-            - name: POSTGRESQL_SHARED_PRELOAD_LIBRARIES
-              value: "pgaudit"
-          ports:
-            - name: tcp-postgresql
-              containerPort: 5432
-          livenessProbe:
-            exec:
-              command:
-                - /bin/sh
-                - -c
-                - exec pg_isready -U "gitea" -d "dbname=gitea" -h 127.0.0.1 -p 5432
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
-            successThreshold: 1
-            failureThreshold: 6
-          readinessProbe:
-            exec:
-              command:
-                - /bin/sh
-                - -c
-                - -e
-                - |
-                  exec pg_isready -U "gitea" -d "dbname=gitea" -h 127.0.0.1 -p 5432
-                  [ -f /opt/bitnami/postgresql/tmp/.initialized ] || [ -f /bitnami/postgresql/.initialized ]
-            initialDelaySeconds: 5
-            periodSeconds: 10
-            timeoutSeconds: 5
-            successThreshold: 1
-            failureThreshold: 6
-          volumeMounts:
-            - name: dshm
-              mountPath: /dev/shm
-            - name: data
-              mountPath: /bitnami/postgresql
-              subPath: 
-      volumes:
-        - name: dshm
-          emptyDir:
-            medium: Memory
-            sizeLimit: 1Gi
-  volumeClaimTemplates:
-    - metadata:
-        name: data
-      spec:
-        accessModes:
-          - "ReadWriteOnce"
-        resources:
-          requests:
-            storage: "10Gi"
----
 # Source: gitea/templates/gitea/statefulset.yaml
 apiVersion: apps/v1
 kind: StatefulSet
@@ -710,7 +489,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: bef0833abfcc85bedffeb17eef23e7a7c304287991d416dc86acd96718c07907
+        checksum/config: ed7a9312d15e84ad2ab14676d52700ec9eec2aeab1b9bf065936a2b5e3b7448c
       labels:
         helm.sh/chart: gitea-7.0.1
         app: gitea

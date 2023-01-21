@@ -322,10 +322,17 @@ gitea:
     RUN_MODE: dev
     server:
       SSH_PORT: 22
-      DOMAIN: gitea.example.com
-      ROOT_URL: https://gitea.example.com
+      DOMAIN: code.example.com
+      ROOT_URL: https://code.example.com
     service:
       DISABLE_REGISTRATION: "true"
+    database:
+      DB_TYPE: postgres
+      HOST: db-host
+      NAME: app
+      USER: app
+      PASSWD: database-password
+
 
   #
   #  security:
@@ -422,15 +429,7 @@ memcached:
 ## @param postgresql.global.postgresql.servicePort PostgreSQL port (overrides service.port)
 ## @param postgresql.persistence.size PVC Storage Request for PostgreSQL volume
 postgresql:
-  enabled: true
-  global:
-    postgresql:
-      postgresqlDatabase: gitea
-      postgresqlUsername: gitea
-      postgresqlPassword: rivohdieReish8ciiVie
-      servicePort: 5432
-  persistence:
-    size: 10Gi
+  enabled: false
 
 ## @section MySQL
 #
