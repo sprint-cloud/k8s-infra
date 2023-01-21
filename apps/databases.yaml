@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/sprint-cloud/k8s-infra'
-    path: databases
+    path: databases/base
     targetRevision: HEAD
   destination:
     server: 'https://kubernetes.default.svc'
