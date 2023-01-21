@@ -57,7 +57,7 @@ spec:
           enabled: true
           prometheusSpec:
             retention: 5d
-            retentionSize: 49Gi
+            retentionSize: 49GB
             podMonitorSelectorNilUsesHelmValues: false
             ruleSelectorNilUsesHelmValues: false
             serviceMonitorSelectorNilUsesHelmValues: false
