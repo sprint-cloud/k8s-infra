@@ -14,6 +14,34 @@ spec:
     helm:
       skipCrds: true
       values: |
+        defaultRules:
+          create: true
+          rules:
+            alertmanager: false
+            etcd: false
+            configReloaders: false
+            general: false
+            k8s: true
+            kubeApiserver: false
+            kubeApiserverAvailability: false
+            kubeApiserverSlos: false
+            kubelet: true
+            kubeProxy: false
+            kubePrometheusGeneral: false
+            kubePrometheusNodeRecording: false
+            kubernetesApps: false
+            kubernetesResources: false
+            kubernetesStorage: false
+            kubernetesSystem: false
+            kubeScheduler: false
+            kubeStateMetrics: false
+            network: false
+            node: true
+            nodeExporterAlerting: false
+            nodeExporterRecording: true
+            prometheus: false
+            prometheusOperator: false
+  
         alertmanager:
           enabled: true
           alertmanagerSpec:
@@ -28,6 +56,12 @@ spec:
         prometheus:
           enabled: true
           prometheusSpec:
+            retention: 5d
+            retentionSize: 49Gi
+            podMonitorSelectorNilUsesHelmValues: false
+            ruleSelectorNilUsesHelmValues: false
+            serviceMonitorSelectorNilUsesHelmValues: false
+            probeSelectorNilUsesHelmValues: false
             storageSpec:
               volumeClaimTemplate:
                 spec:
@@ -40,6 +74,9 @@ spec:
           enabled: true
           defaultDashboardsTimezone: Europe/Amsterdam
           adminPassword: prom-operator
+          sidecar:
+            dashboards:
+              enabled: true
 
 
   destination:
