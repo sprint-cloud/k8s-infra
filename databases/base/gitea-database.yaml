@@ -1,0 +1,12 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: gitea
+  namespace: database-production
+spec:
+  instances: 2
+  primaryUpdateStrategy: unsupervised
+  monitoring:
+    enablePodMonitor: true
+  storage:
+    size: 10Gi
