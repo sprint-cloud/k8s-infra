@@ -24,6 +24,9 @@ patches:
       - op: replace
         path: /spec/commonName
         value: code.sprint.luchtenberg.eu
+      - op: replace
+        path: /spec/dnsNames
+        value: ['code.sprint.luchtenberg.eu']
     target:
       kind: Certificate
       name: gitea-cert
