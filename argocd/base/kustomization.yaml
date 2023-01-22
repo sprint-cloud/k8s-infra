@@ -2,6 +2,7 @@ commonLabels:
   team: infrastructure
 
 resources:
+  - namespace.yaml
   - https://raw.githubusercontent.com/argoproj/argo-cd/v2.5.7/manifests/install.yaml
   - argocd-cm.yaml
   - ingress.yaml
