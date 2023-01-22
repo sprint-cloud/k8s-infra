@@ -1,0 +1,9 @@
+commonLabels:
+  environment: staging
+
+bases:
+  - "../../base"
+
+patchesStrategicMerge:
+  - patch-cert.yaml
+  - patch-ingress.yaml
