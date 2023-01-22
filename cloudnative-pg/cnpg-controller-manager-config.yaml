@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cnpg-controller-manager-config
+  namespace: cnpg-system
+data:
+  INHERITED_LABELS: environment, team, app, release
+  ENABLE_INSTANCE_MANAGER_INPLACE_UPDATES: 'true'
