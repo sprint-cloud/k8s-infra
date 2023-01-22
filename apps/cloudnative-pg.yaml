@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/sprint-cloud/k8s-infra'
-    path: cloudnative-pg
+    path: cloudnative-pg/overlays/staging
     targetRevision: HEAD
   destination:
     server: 'https://kubernetes.default.svc'
