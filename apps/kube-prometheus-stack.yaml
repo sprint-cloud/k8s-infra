@@ -59,7 +59,7 @@ spec:
         prometheus:
           enabled: true
           prometheusSpec:
-            podMonitorNamespaceSelector:
+            podMonitorSelector:
               matchLabels:
                 metrics: enabled
             retention: 24h
