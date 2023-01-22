@@ -14,13 +14,22 @@ spec:
     helm:
       skipCrds: true
       values: |
+        kubelet:
+          enabled: false
+        kubeApiServer:
+          enabled: false
+        kubeControllerManager:
+          enabled: false
+        kubeScheduler:
+          enabled: false
+        kubeProxy:
+          enabled: false
+        kubeEtcd:
+          enabled: false
         defaultRules:
           create: true
           rules:
-            alertmanager: false
             etcd: false
-            configReloaders: false
-            general: false
             k8s: true
             kubeApiserver: false
             kubeApiserverAvailability: false
@@ -35,13 +44,7 @@ spec:
             kubernetesSystem: false
             kubeScheduler: false
             kubeStateMetrics: false
-            network: false
-            node: true
-            nodeExporterAlerting: false
-            nodeExporterRecording: true
-            prometheus: false
-            prometheusOperator: false
-  
+        
         alertmanager:
           enabled: true
           alertmanagerSpec:
@@ -52,16 +55,15 @@ spec:
                   accessModes: ["ReadWriteOnce"]
                   resources:
                     requests:
-                      storage: 5Gi
+                      storage: 2Gi
         prometheus:
           enabled: true
           prometheusSpec:
-            retention: 5d
-            retentionSize: 49GB
-            podMonitorSelectorNilUsesHelmValues: false
-            ruleSelectorNilUsesHelmValues: false
-            serviceMonitorSelectorNilUsesHelmValues: false
-            probeSelectorNilUsesHelmValues: false
+            podMonitorNamespaceSelector:
+              matchLabels:
+                metrics: enabled
+            retention: 24h
+            retentionSize: 10GB
             storageSpec:
               volumeClaimTemplate:
                 spec:
@@ -69,7 +71,7 @@ spec:
                   accessModes: ["ReadWriteOnce"]
                   resources:
                     requests:
-                      storage: 50Gi
+                      storage: 11Gi
         grafana:
           enabled: true
           defaultDashboardsTimezone: Europe/Amsterdam
