@@ -3,9 +3,6 @@ kind: Cluster
 metadata:
   name: gitea
   namespace: database-infra
-  labels:
-    metrics: enabled
-    team: infrastructure
 spec:
   instances: 2
   primaryUpdateStrategy: unsupervised

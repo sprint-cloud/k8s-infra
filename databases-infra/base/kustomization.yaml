@@ -1,0 +1,7 @@
+commonLabels:
+  team: infrastructure
+  metrics: enabled
+
+resources:
+  - namespace.yaml
+  - gitea-database.yaml
