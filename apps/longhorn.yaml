@@ -10,6 +10,9 @@ spec:
   source:
     repoURL: https://charts.longhorn.io
     targetRevision: HEAD
+    path: longhorn/overlays/staging
+    kustomize:
+      enableHelm: true
   destination:
     name: in-cluster
     namespace: longhorn-system
