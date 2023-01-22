@@ -9,12 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://charts.longhorn.io
-    targetRevision: "1.4.0"
-    chart: longhorn
-    helm:
-      values: |
-        persistence:
-          defaultclass: true
+    targetRevision: HEAD
   destination:
     name: in-cluster
     namespace: longhorn-system

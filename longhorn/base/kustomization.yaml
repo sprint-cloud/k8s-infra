@@ -1,0 +1,17 @@
+commonLabels:
+  team: infrastructure
+
+resources:
+  - "ingress.yaml"
+  - "certificate.yaml"
+
+helmCharts:
+  - name: longhorn
+    repo: https://charts.longhorn.io
+    releaseName: longhorn
+    namespace: longhorn-system
+    version: 1.4.0
+    valuesInline: 
+        persistence:
+          defaultclass: false
+      
