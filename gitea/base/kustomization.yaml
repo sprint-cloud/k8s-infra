@@ -1,8 +1,15 @@
 commonLabels:
   team: infrastructure
 
+helmCharts:
+  - name: gitea
+    repo: https://dl.gitea.io/charts/
+    releaseName: gitea
+    namespace: gitea
+    version: 7.0.1
+    valuesFile: values.yaml
+
 resources:
-  - gitea.yaml
   - ingress.yaml
   - certificate.yaml
 
