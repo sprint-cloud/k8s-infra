@@ -4,5 +4,5 @@ metadata:
   name: cnpg-controller-manager-config
   namespace: cnpg-system
 data:
-  INHERITED_LABELS: environment, team, app, release
+  INHERITED_LABELS: environment, team, app, metrics
   ENABLE_INSTANCE_MANAGER_INPLACE_UPDATES: 'true'
