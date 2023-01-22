@@ -5,5 +5,13 @@ bases:
   - "../../base"
 
 patchesStrategicMerge:
-  - patch-ingress.yaml
   - patch-cert.yaml
+
+patches:
+  - patch: |
+      - op: replace
+        path: '/spec/routes/0/match'
+        value: Host(`longhorn.infra.sprint.luchtenberg.eu`)
+    target:
+      kind: IngressRoute
+      name: longhorn
