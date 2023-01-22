@@ -1,3 +1,6 @@
+commonLabels:
+  team: infrastructure
+
 resources:
   - gitea.yaml
   - ingress.yaml
