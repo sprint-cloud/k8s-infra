@@ -6,4 +6,12 @@ bases:
 
 patchesStrategicMerge:
   - patch-cert.yaml
-  - patch-ingress.yaml
+
+patches:
+  - patch: |
+      - op: replace
+        path: '/spec/routes/0/match'
+        value: Host(`argocd.infra.sprint.luchtenberg.eu`)
+    target:
+      kind: IngressRoute
+      name: argocd-server
