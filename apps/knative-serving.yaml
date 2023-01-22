@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/sprint-cloud/k8s-infra'
-    path: knative-serving/overlay/dev
+    path: knative-serving/overlay/staging
     targetRevision: HEAD
   destination:
     server: 'https://kubernetes.default.svc'
