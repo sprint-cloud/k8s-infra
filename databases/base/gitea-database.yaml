@@ -2,10 +2,19 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: gitea
-  namespace: database-production
+  namespace: database-infra
+  labels:
+    metrics: enabled
+    team: infrastructure
 spec:
   instances: 2
   primaryUpdateStrategy: unsupervised
+  bootstrap:
+    initdb:
+      database: gitea
+      owner: gitea
+      secret:
+        name: gitea-db-secret
   monitoring:
     enablePodMonitor: true
   storage:

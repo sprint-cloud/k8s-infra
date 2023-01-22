@@ -1,0 +1,8 @@
+bases:
+  - "../../base"
+
+resources:
+  - "gitea-db-secret-sealed.yaml"
+
+commonLabels:
+  environment: staging

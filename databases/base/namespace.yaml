@@ -1,4 +1,6 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: database-production
+  name: database-infra
+  labels:
+    team: infrastructure
