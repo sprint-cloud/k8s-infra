@@ -10,4 +10,4 @@ spec:
     - name: repo-url
       value: "https://code.sprint.luchtenberg.eu/$(body.repository.full_name)"
     - name: image-reference
-      value: "code.sprint.luchtenberg.eu/Microservices/$(body.repository.name):latest"
+      value: "code.sprint.luchtenberg.eu/microservices/$(body.repository.name):latest"

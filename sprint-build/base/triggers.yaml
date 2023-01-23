@@ -57,7 +57,7 @@ spec:
     - name: repo-url
       value: "https://example.com/$(body.repository.full_name)"
     - name: image-reference
-      value: "example.com/Microservices/$(body.repository.name):latest"
+      value: "example.com/microservices/$(body.repository.name):latest"
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: EventListener
