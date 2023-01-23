@@ -3,3 +3,6 @@ commonLabels:
 
 bases:
   - ../../base
+
+patchesStrategicMerge:
+  - patch-trigger-template.yaml

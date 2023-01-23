@@ -1,0 +1,13 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerBinding
+metadata:
+  name: sprint-build-pipelinebinding
+  namespace: sprint-build
+spec:
+  params:
+    - name: repo-revision
+      value: $(body.ref)
+    - name: repo-url
+      value: "https://code.sprint.luchtenberg.eu/$(body.repository.full_name)"
+    - name: image-reference
+      value: "code.sprint.luchtenberg.eu/Microservices/$(body.repository.name):latest"
