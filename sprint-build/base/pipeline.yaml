@@ -41,7 +41,7 @@ spec:
     - name: CONTEXT
       value: "Sprint-build-pipeline"
   - name: fetch-source
-    runAfter: ["gitea-set-status-pending"]
+    runAfter: ["gitea-set-status-cloning"]
     taskRef:
       name: git-clone
     workspaces:
@@ -52,8 +52,8 @@ spec:
       value: $(params.repo-url)
     - name: revision
       value: $(params.repo-revision)
-
   - name: gitea-set-status-building
+    runAfter: ["fetch-source"]
     taskRef:
       name: gitea-set-status
     params:
@@ -71,9 +71,8 @@ spec:
       value: https://tekton/dashboard/taskrun/log
     - name: CONTEXT
       value: "Sprint-build-pipeline"
-
   - name: build-push
-    runAfter: ["fetch-source"]
+    runAfter: ["gitea-set-status-building"]
     taskRef:
       name: kaniko
     workspaces:
