@@ -19,7 +19,7 @@ patches:
   - patch: |
       - op: replace
         path: /spec/issuerRef/name
-        value: letsencrypt-staging
+        value: letsencrypt-production
     target:
       kind: Certificate
       name: gitea-cert
