@@ -35,7 +35,7 @@ spec:
     - name: DESCRIPTION
       value: "Your image is being build"
     - name: STATE
-      value: "Building"
+      value: "pending"
     - name: TARGET_URL
       value: https://tekton/dashboard/taskrun/log
   - name: fetch-source
@@ -76,7 +76,7 @@ spec:
     - name: DESCRIPTION
       value: "Build has finished succesfully"
     - name: STATE
-      value: "Complete"
+      value: "success"
     - name: TARGET_URL
       value: https://tekton/dashboard/taskrun/log
     
