@@ -4,16 +4,19 @@ metadata:
   name: tekton
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
   source:
     repoURL: 'https://github.com/sprint-cloud/k8s-infra'
-    path: tekton
+    path: tekton/overlays/staging
     targetRevision: HEAD
   destination:
     server: 'https://kubernetes.default.svc'
+    namespace: tekton-pipelines
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
     automated:
       selfHeal: true
       prune: true
