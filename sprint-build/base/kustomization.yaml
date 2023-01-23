@@ -1,0 +1,14 @@
+commonLabels:
+  team: infrastructure
+
+resources:
+  - "namespace.yaml"
+  - "rbac/admin-role.yaml"
+  - "rbac/clusterrolebinding.yaml"
+  - "rbac/webhook-role.yaml"
+  - "https://raw.githubusercontent.com/tektoncd/catalog/main/task/git-clone/0.9/git-clone.yaml"
+  - "https://raw.githubusercontent.com/tektoncd/catalog/main/task/kaniko/0.6/kaniko.yaml"
+  - "pipeline.yaml"
+  - "triggers.yaml"
+
+ 
