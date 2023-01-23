@@ -28,7 +28,7 @@ spec:
         - name: shared-data
           volumeClaimTemplate:
             spec:
-              storageClass: local-path
+              storageClassName: local-path
               accessModes:
               - ReadWriteOnce
               resources:
