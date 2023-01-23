@@ -1,0 +1,5 @@
+commonLabels:
+  team: infrastructure
+
+resources:
+  - "https://storage.googleapis.com/tekton-releases/pipeline/previous/v0.43.2/release.yaml"

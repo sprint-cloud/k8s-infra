@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tekton
+  name: tekton-triggers
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "1"
@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/sprint-cloud/k8s-infra'
-    path: tekton/overlays/staging
+    path: tekton-triggers/overlays/staging
     targetRevision: HEAD
   destination:
     server: 'https://kubernetes.default.svc'
