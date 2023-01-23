@@ -133,7 +133,7 @@ spec:
             "description": "$(params.DESCRIPTION)",
             "context": "$(params.CONTEXT)"
         }
-        print("Sending this data to Gitea at https://%s/%s :".format(params.GITEA_HOST_URL, status_url))
+        print("Sending this data to Gitea at https://%s/%s :".format($(params.GITEA_HOST_URL), status_url))
         print(data)
 
         authHeader = "token " + gitea_token
