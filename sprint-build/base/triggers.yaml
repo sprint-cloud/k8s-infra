@@ -10,6 +10,10 @@ spec:
       default: master
     - name: repo-url
       description: The git repository url
+    - name: repo-full-name
+      description: Full name of git repo
+    - name: commit-id
+      description: Commit id
     - name: image-reference
       description: Target image registry
   resourcetemplates:
@@ -44,6 +48,10 @@ spec:
           value: $(tt.params.repo-revision)
         - name: image-reference
           value: $(tt.params.image-reference)
+        - name: repo-full-name
+          value: $(tt.params.repo-full-name)
+        - name: commit-id
+          value: $(tt.params.commit-id)
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerBinding
@@ -58,6 +66,10 @@ spec:
       value: "https://example.com/$(body.repository.full_name)"
     - name: image-reference
       value: "example.com/microservices/$(body.repository.name):latest"
+    - name: repo-full-name
+      value: $(body.repository.full_name)
+    - name: commit-id
+      value: $(body.after)
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: EventListener

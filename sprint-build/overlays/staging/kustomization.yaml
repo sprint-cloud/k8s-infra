@@ -6,6 +6,7 @@ bases:
 
 resources:
   - docker-credentials-secret-sealed.yaml
+  - gitea-token-sealed.yaml
 
 patchesStrategicMerge:
   - patch-trigger-template.yaml
