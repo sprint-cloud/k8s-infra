@@ -71,22 +71,4 @@ spec:
       - ref: sprint-build-pipelinebinding
       template:
         ref: sprint-build-triggertemplate
-      interceptors:
-        - ref:
-            name: "github"
-            kind: ClusterInterceptor
-            apiVersion: triggers.tekton.dev
-          params:
-            - name: "secretRef"
-              value:
-                secretName: github-webhook-secret
-                secretKey: secretToken
-            - name: "eventTypes"
-              value: ["push"]
-        - name: "Only trigger if branch Staging branch"
-          ref:
-            name: "cel"
-          params:
-            - name: "filter"
-              value: "body.ref in ['refs/heads/staging']"
 
