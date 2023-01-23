@@ -22,7 +22,7 @@ spec:
   - name: shared-data
   - name: docker-credentials
   tasks:
-  - name: gitea-set-status-cloning
+  - name: gitea-set-status-pending
     taskRef:
       name: gitea-set-status
     params:
@@ -33,7 +33,7 @@ spec:
     - name: SHA
       value: $(params.commit-id)
     - name: DESCRIPTION
-      value: "Bezig met source code clonen"
+      value: "Bezig met image bouwen"
     - name: STATE
       value: "pending"
     - name: TARGET_URL
@@ -41,7 +41,7 @@ spec:
     - name: CONTEXT
       value: "Sprint-build-pipeline"
   - name: fetch-source
-    runAfter: ["gitea-set-status-cloning"]
+    runAfter: ["gitea-set-status-pending"]
     taskRef:
       name: git-clone
     workspaces:
@@ -52,27 +52,8 @@ spec:
       value: $(params.repo-url)
     - name: revision
       value: $(params.repo-revision)
-  - name: gitea-set-status-building
-    runAfter: ["fetch-source"]
-    taskRef:
-      name: gitea-set-status
-    params:
-    - name: REPO_FULL_NAME
-      value: $(params.repo-full-name)
-    - name: GITEA_HOST_URL
-      value: code.sprint.luchtenberg.eu
-    - name: SHA
-      value: $(params.commit-id)
-    - name: DESCRIPTION
-      value: "Bezig met Image bouwen"
-    - name: STATE
-      value: "pending"
-    - name: TARGET_URL
-      value: https://tekton/dashboard/taskrun/log
-    - name: CONTEXT
-      value: "Sprint-build-pipeline"
   - name: build-push
-    runAfter: ["gitea-set-status-building"]
+    runAfter: ["fetch-source"]
     taskRef:
       name: kaniko
     workspaces:
