@@ -74,9 +74,11 @@ spec:
     - name: SHA
       value: $(params.commit-id)
     - name: DESCRIPTION
-      value: "Build has finished succesfully"
+      value: "Je image is klaar en naar $(params.image-reference) gepushed"
     - name: STATE
       value: "success"
     - name: TARGET_URL
       value: https://tekton/dashboard/taskrun/log
+    - name: CONTEXT
+      value: "Sprint-build-pipeline"
     
