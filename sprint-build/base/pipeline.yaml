@@ -26,6 +26,8 @@ spec:
     taskRef:
       name: gitea-set-status
     params:
+    - name: GITEA_TOKEN_SECRET_NAME
+      value: gitea-bot-token
     - name: REPO_FULL_NAME
       value: $(params.repo-full-name)
     - name: GITEA_HOST_URL
@@ -69,6 +71,8 @@ spec:
     taskRef:
       name: gitea-set-status
     params:
+    - name: GITEA_TOKEN_SECRET_NAME
+      value: gitea-bot-token
     - name: REPO_FULL_NAME
       value: $(params.repo-full-name)
     - name: GITEA_HOST_URL

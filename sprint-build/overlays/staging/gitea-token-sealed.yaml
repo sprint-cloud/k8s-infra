@@ -2,15 +2,14 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   creationTimestamp: null
-  name: gitea
+  name: gitea-bot-token
   namespace: sprint-build
 spec:
   encryptedData:
-    token: AgALC79TrIbaFASRyFFIMwJ1yK+acn+SslFMwdzR82JwNSMx/6mNjWm6kzhY8082L4jbROiItxVUA/ulkZSuZuIQhT9ykAtAMjpduN842t7SYF4ODnC0yzMYtseU1og7bufPJFFDeEGA8vUfrF9kmejz4669ghSfaWjrgYbay5Z3YOk0EchILfCn2QT7TRa3Vvru30kAmvGgoBNiDzA12XayhnuFZq8ykKSF+lLHdcmPSUOLBKeTgM6wjDlunEv2r/4TbxLdg0gKPNLquuzGsiLqT2bY8SnHsGxpnlZfpu2CeQlEn63hevF7ddtH4636BLU/aKx22fR/MQpJ/muCBfCxIj2Ai6aCB4FkJSYD9UFCuzl2/1zqri61FOzWirtfg0/JKRvKE6LII5oJBlyFAgH82N6tjymwhxIc+UO7WC9s8t//4nPmc/qL6+SKGsQgThXOTaxogPYsOebi1OtZFmyQ0quWyfRsVMsbXJGKEP0EvJkPjvClUeyZvgHMY8l2W88Z4IVQAhLR4fJHWtRcLv6lvzOzDiFxJCSxwTahRdpSB3LZod6Y/GGNdyfZOwRb23ngf0norYvdRErcA75Rw9qOGc0pdi2mslGJzGcFtqGEnMePndJfi1cZtHorxjfdgX0K+zW/MQ90X0x4svy4wom7p0F6YS0w7iMrS8zJwld1fF3Myv1F2YzOgu+G+46Rbc+Nx3xoOasmg+7uZ30rlYGMUyIWTAoM7wixjjNb2nlG5oKXqxEpcd0x
+    token: AgAZLzCKrPuNc2mDReezZfRqwjIZz9+c2DFf1s3OgFwdJO+I4Wg4ayFhhxsPkx1QuwXNdT5ZPsBcQrDkDLKQpXlrzop/Gktq51FJVwjAGyWOtkqYk08q8HIE5eXe6FWshPk/R2sicRF0lUyZxiH/Ib2kQBqqncbY2cyd+viWpybR3L7kvLFQzMBanoVpr184SNaHTAOYN3hVrvfZe/1y0BkwpwgmTPZpBf9Mu7A7QrWDv/tvqk0PwjOSUI/4jaCPT4EgKrbpTeveXMuVFXEbMPAcngquPJEOK+0GjeALXoXsklJf61DrQluWeUdHznfyNUGiF/HzE/A8SMck+vl1fJ0neXxfP3AhhSqqFKA2d0ktfpb6a2J4mhlaA32Ooqmkn/tZuzd9lDH+7bARWW+xd5PDGCp4/ytPyApEo1T1uzlEuwQn83WDRUn8NNCtqptMAtRZ+ESLvW/SJau8PAhPvMuZjsqbyqyaBPY0DeJvzLQAzMHXz/oV7d095VuUwAt8jSGxiFrScPObyXUA5Vg2oawJSHWUxR0gF08q6/rPRFlNVrGxwkgLujUHwWxTHzJjei7h+ynOpgU6tgaSiFNy5hmtO2cidojUNmaIe6BMIXYJhImNaGjhACgLw01ze/UPI/HgW5Cq3OpSVEa1laGmMD7Y7lhoPMdd683CFzgaiiR+zSJ5kmRAj/cI/5l0e7SlAU1ZismuqVv+xEpdn+uJ/6XyQxAZTrLvR4o74oG0itc=
   template:
     metadata:
       creationTimestamp: null
-      name: gitea
+      name: gitea-bot-token
       namespace: sprint-build
-    type: Opaque
 
