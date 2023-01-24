@@ -6,4 +6,3 @@ bases:
 
 resources:
   - docker-credentials-secret-sealed.yaml
-  - gitea-token-sealed.yaml
