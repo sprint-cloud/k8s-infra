@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: sprint-services
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Sprint service applications
+  sourceRepos:
+    - 'https://github.com/sprint-cloud/k8s-infra'
+  destinations:
+  - namespace: '*'
+    server: https://kubernetes.default.svc
+    name: in-cluster
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
