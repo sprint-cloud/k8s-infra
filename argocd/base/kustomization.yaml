@@ -6,6 +6,7 @@ resources:
   - https://raw.githubusercontent.com/argoproj/argo-cd/v2.5.7/manifests/install.yaml
   - ingress.yaml
   - certificate.yaml
+namespace: argocd
 
 patchesStrategicMerge:
   - patch-config.yaml
