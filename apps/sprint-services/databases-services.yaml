@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: databases-infra
+  name: databases-services
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "2"
 spec:
-  project: default
+  project: sprint-services
   source:
     repoURL: 'https://github.com/sprint-cloud/k8s-infra'
-    path: databases-infra/overlays/staging
+    path: databases-services/overlays/staging
     targetRevision: HEAD
   destination:
     server: 'https://kubernetes.default.svc'
