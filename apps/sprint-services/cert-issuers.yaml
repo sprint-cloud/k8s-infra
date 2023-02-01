@@ -9,7 +9,7 @@ spec:
   destination:
     namespace: cert-manager
     server: https://kubernetes.default.svc
-  project: default
+  project: sprint-services
   source:
     path: cert-manager/issuers
     repoURL: https://github.com/sprint-cloud/k8s-infra

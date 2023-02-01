@@ -8,7 +8,7 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: default
+  project: sprint-services
   source:
     repoURL: 'https://github.com/sprint-cloud/k8s-infra'
     path: gitea/overlays/staging

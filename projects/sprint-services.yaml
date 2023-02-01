@@ -8,7 +8,7 @@ metadata:
 spec:
   description: Sprint service applications
   sourceRepos:
-    - 'https://github.com/sprint-cloud/k8s-infra'
+    - '*'
   destinations:
   - namespace: '*'
     server: https://kubernetes.default.svc
