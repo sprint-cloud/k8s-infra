@@ -14,37 +14,6 @@ spec:
     helm:
       skipCrds: true
       values: |
-        kubelet:
-          enabled: false
-        kubeApiServer:
-          enabled: false
-        kubeControllerManager:
-          enabled: false
-        kubeScheduler:
-          enabled: false
-        kubeProxy:
-          enabled: false
-        kubeEtcd:
-          enabled: false
-        defaultRules:
-          create: true
-          rules:
-            etcd: false
-            k8s: true
-            kubeApiserver: false
-            kubeApiserverAvailability: false
-            kubeApiserverSlos: false
-            kubelet: true
-            kubeProxy: false
-            kubePrometheusGeneral: false
-            kubePrometheusNodeRecording: false
-            kubernetesApps: false
-            kubernetesResources: false
-            kubernetesStorage: false
-            kubernetesSystem: false
-            kubeScheduler: false
-            kubeStateMetrics: false
-        
         alertmanager:
           enabled: true
           alertmanagerSpec:
@@ -62,8 +31,8 @@ spec:
             podMonitorSelector:
               matchLabels:
                 metrics: enabled
-            retention: 24h
-            retentionSize: 10GB
+            retention: 5d
+            retentionSize: 50GB
             storageSpec:
               volumeClaimTemplate:
                 spec:
@@ -71,7 +40,7 @@ spec:
                   accessModes: ["ReadWriteOnce"]
                   resources:
                     requests:
-                      storage: 11Gi
+                      storage: 51Gi
         grafana:
           enabled: true
           defaultDashboardsTimezone: Europe/Amsterdam
