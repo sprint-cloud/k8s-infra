@@ -2,7 +2,6 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: gitea
-  namespace: database-infra
 spec:
   instances: 2
   primaryUpdateStrategy: unsupervised
