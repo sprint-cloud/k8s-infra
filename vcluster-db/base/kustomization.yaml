@@ -1,0 +1,7 @@
+namespace: vcluster-db
+commonLabels:
+  team: infrastructure
+
+resources:
+  - "database.yaml"
+

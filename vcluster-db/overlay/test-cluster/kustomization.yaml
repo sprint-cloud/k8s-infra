@@ -1,0 +1,15 @@
+commonLabels:
+  environment: staging
+
+bases:
+  - "../../base"
+
+patches:
+  - patch: |
+      - op: replace
+        path: '/metadata/name'
+        value: test-cluster-db
+    target:
+      kind: Cluster
+      name: standard-vcluster-db
+      
