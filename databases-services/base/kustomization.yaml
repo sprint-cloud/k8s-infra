@@ -1,9 +1,0 @@
-commonLabels:
-  team: infrastructure
-  metrics: enabled
-
-resources:
-  - namespace.yaml
-  - vcluster-database.yaml
-
-namespace: database-infra
