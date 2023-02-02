@@ -4,6 +4,6 @@ commonLabels:
 
 resources:
   - namespace.yaml
-  - gitea-database.yaml
+  - vcluster-database.yaml
 
-namespace: database-services
+namespace: database-infra

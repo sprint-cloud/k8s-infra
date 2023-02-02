@@ -1,16 +1,10 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: gitea
+  name: vcluster-db
 spec:
   instances: 3
   primaryUpdateStrategy: unsupervised
-  bootstrap:
-    initdb:
-      database: gitea
-      owner: gitea
-      secret:
-        name: gitea-db-secret
   monitoring:
     enablePodMonitor: true
   storage:
